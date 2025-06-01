@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { useEffect } from "react";
+import { useActionState , useEffect} from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -29,7 +29,7 @@ function SubmitButton() {
 }
 
 export default function SEOOptimizerForm() {
-  const [state, formAction] = useFormState(getOptimizedTextAction, initialState);
+  const [state, formAction] = useActionState(getOptimizedTextAction, initialState);
   const { toast } = useToast();
 
   useEffect(() => {

@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     };
   }
   return {
-    title: `${project.title} | FolioForge`,
+    title: `${project.title}`,
     description: project.shortDescription,
   };
 }

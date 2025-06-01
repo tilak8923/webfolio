@@ -18,7 +18,7 @@ export default function Header() {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Feather className="h-6 w-6 text-primary" />
-          <span className="font-headline text-xl font-bold">FolioForge</span>
+          <span className="font-headline text-xl font-bold">illusionist</span>
         </Link>
         
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
