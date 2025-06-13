@@ -4,6 +4,7 @@ import SkillsOverviewSection from '@/components/sections/skills-overview-section
 import ProjectShowcaseSection from '@/components/sections/project-showcase-section';
 import ContactSection from '@/components/sections/contact-section';
 import { aboutMe, projectsData, skillsData } from '@/lib/portfolio-data';
+import favicon from '@/public/favicon.ico';
 
 export default function HomePage() {
   return (

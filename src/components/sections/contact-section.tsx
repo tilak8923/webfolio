@@ -30,8 +30,8 @@ export default function ContactSection() {
                 <CardContent className="space-y-3">
                     <p className="text-muted-foreground">Feel free to reach out via email or connect with me on social media.</p>
                     {/* <p><span className="font-semibold">Email:</span> <a href={`mailto:${aboutMe.name.split(' ')[0].toLowerCase()}@example.com`} className="text-primary hover:underline">{`${aboutMe.name.split(' ')[0].toLowerCase()}@example.com`}</a> (placeholder)</p> */}
-                    <p><span className="font-semibold">Email:</span> <a href="mailto:aboutMe.email" className="text-primary hover:underline">{aboutMe.email}</a> (placeholder)</p>
-                    <p><span className="font-semibold">Location:</span> Noida (Remote Friendly)</p>
+                    <p><span className="font-semibold">Email:</span> <a href="mailto:aboutMe.email" className="text-primary hover:underline">{aboutMe.email}</a> </p>
+                    <p><span className="font-semibold">Location:</span> Noida</p>
                 </CardContent>
             </Card>
 

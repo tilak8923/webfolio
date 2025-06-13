@@ -43,17 +43,23 @@ export interface AboutMeData {
 export const aboutMe: AboutMeData = {
   name: 'Tilak Tiwari',
   email: 'tilaktiwari789@gmail.com',
-  title: 'Full-stack Developer & Tech Enthusiast',
-  tagline: 'Crafting innovative digital solutions with a passion for technology and leadership.',
-  bio: `
-Hello! I'm Tilak, a versatile Full-stack Developer with a knack for bringing complex projects to life. 
-With several years of experience in the tech industry, I've honed my skills in both front-end and back-end development, 
-specializing in creating responsive, user-friendly web applications. 
-My approach is rooted in a strong understanding of software architecture, agile methodologies, and a commitment to continuous learning. 
-I thrive in collaborative environments and enjoy tackling challenges that push the boundaries of technology. 
-When I'm not coding, you can find me exploring new tech trends or contributing to open-source projects.
+  title: 'Web Developer | Cybersecurity Learner',
+  tagline: 'Exploring web development and cybersecurity with a passion for building and securing digital solutions.',
+  bio: 
+// Hello! I'm Tilak, a versatile Full-stack Developer with a knack for bringing complex projects to life. 
+// With several years of experience in the tech industry, I've honed my skills in both front-end and back-end development, 
+// specializing in creating responsive, user-friendly web applications. 
+// My approach is rooted in a strong understanding of software architecture, agile methodologies, and a commitment to continuous learning. 
+// I thrive in collaborative environments and enjoy tackling challenges that push the boundaries of technology. 
+// When I'm not coding, you can find me exploring new tech trends or contributing to open-source projects.
+`
+Hi, I’m Tilak — an aspiring web developer who enjoys creating simple, user-friendly websites and learning how to make them more secure. 
+I’m passionate about understanding how technology works at both the code and security levels
+I’m continuously improving my skills through personal projects and hands-on practice. 
+My long-term goal is to grow as a developer with strong cybersecurity knowledge so I can contribute to building safer digital systems. 
+Outside of coding, I like exploring new tech trends, learning about ethical hacking, and experimenting with ideas that challenge me.
   `.trim(),
-  headshotUrl: '/assets/image/profile_pic.jpeg',
+  headshotUrl: '/assets/image/mypic.jpg',
   headshotAiHint: 'professional portrait',
   resumeUrl: '/assets/documents/TilakTiwariResume.pdf', 
 };
@@ -63,7 +69,7 @@ export const projectsData: Project[] = [
     id: 'AI-Chatbot',
     title: 'MediMate AI(AI-powered healthcare Chatbot Assistant)',
     shortDescription: 'An AI-powered healthcare assistant web app built with Next.js, Tailwind CSS, Node.js, and Firebase.Features include Google login, real-time chat with a medical AI chatbot, and secure chat history management — designed for patients seeking quick and reliable medical guidance.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: '/assets/image/headshotUrl.png',
     imageAiHint: 'coding interface',
     liveDemoUrl: '#',
     githubRepoUrl: 'https://github.com/tilak8923/MediMate-AI',
@@ -90,42 +96,42 @@ MediMate AI is an AI-powered chatbot assistant designed for the healthcare secto
     useCases: ['Medical Chatbot', 'Patient Support Platform', 'Virtual Health Consultation'],
     technologies: ['Next.js', 'Node.js' , 'Tailwind CSS','Firebase Authentication', 'Firebase Firestore (Database)','Google Sign-In Integration', 'AI Chatbot (OpenAI-based or similar)', 'Responsive UI/UX Design', 'Real-time Chat Interface'],
   },
-  {
-    id: 'Sriinsta',
-    title: 'Sriinsta',
-    shortDescription: 'A full-stack Instagram-inspired web app with user authentication, post management, and profile features built using Node.js, Express, MongoDB, and vanilla frontend technologies.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageAiHint: 'instagram clone app UI design',
-    liveDemoUrl: '#',
-    githubRepoUrl: 'https://github.com/tilak8923/instaClone',
-    tags: ['Node.js', 'Express', 'MongoDB', 'JavaScript', 'HTML', 'CSS'],
-    fullDescription: `
-  ### Project Overview
-  This is a full-stack Instagram clone project designed to replicate core features of Instagram including user authentication, post uploading, and profile management. The frontend is built with HTML, CSS, and JavaScript while the backend uses Node.js with Express and MongoDB for database storage.
+  // {
+  //   id: 'Sriinsta',
+  //   title: 'Sriinsta',
+  //   shortDescription: 'A full-stack Instagram-inspired web app with user authentication, post management, and profile features built using Node.js, Express, MongoDB, and vanilla frontend technologies.',
+  //   imageUrl: 'https://placehold.co/600x400.png',
+  //   imageAiHint: 'instagram clone app UI design',
+  //   liveDemoUrl: '#',
+  //   githubRepoUrl: 'https://github.com/tilak8923/instaClone',
+  //   tags: ['Node.js', 'Express', 'MongoDB', 'JavaScript', 'HTML', 'CSS'],
+  //   fullDescription: `
+  // ### Project Overview
+  // This is a full-stack Instagram clone project designed to replicate core features of Instagram including user authentication, post uploading, and profile management. The frontend is built with HTML, CSS, and JavaScript while the backend uses Node.js with Express and MongoDB for database storage.
   
-  ### Key Features
-  - User Authentication: Secure signup and login functionality using sessions or JWT with MongoDB.  
-  - Post Upload & Display: Users can upload images and videos, which are displayed in a grid on their profile page.  
-  - Profile Management: Custom profile pages featuring user info and a grid of all user posts.  
-  - Post Preview: Long press or click-to-preview posts using a custom viewModel() function.  
-  - Responsive UI: Clean and responsive design for seamless user experience across devices.  
-  - Backend API: RESTful API endpoints handling user data and posts efficiently.  
+  // ### Key Features
+  // - User Authentication: Secure signup and login functionality using sessions or JWT with MongoDB.  
+  // - Post Upload & Display: Users can upload images and videos, which are displayed in a grid on their profile page.  
+  // - Profile Management: Custom profile pages featuring user info and a grid of all user posts.  
+  // - Post Preview: Long press or click-to-preview posts using a custom viewModel() function.  
+  // - Responsive UI: Clean and responsive design for seamless user experience across devices.  
+  // - Backend API: RESTful API endpoints handling user data and posts efficiently.  
   
-  ### Technologies Used
-  - Node.js and Express for backend server and API development.  
-  - MongoDB as a NoSQL database for storing users and post metadata.  
-  - HTML, CSS, and JavaScript for frontend UI and interactions.  
-  - Vercel for frontend deployment.  
-    `.trim(),
-    screenshots: ['https://placehold.co/800x600.png', 'https://placehold.co/800x600.png'],
-    useCases: ['Social Media Clone', 'Full Stack Learning', 'User Authentication Practice'],
-    technologies: ['Node.js', 'Express', 'MongoDB', 'JavaScript', 'HTML', 'CSS'],
-  },
+  // ### Technologies Used
+  // - Node.js and Express for backend server and API development.  
+  // - MongoDB as a NoSQL database for storing users and post metadata.  
+  // - HTML, CSS, and JavaScript for frontend UI and interactions.  
+  // - Vercel for frontend deployment.  
+  //   `.trim(),
+  //   screenshots: ['https://placehold.co/800x600.png', 'https://placehold.co/800x600.png'],
+  //   useCases: ['Social Media Clone', 'Full Stack Learning', 'User Authentication Practice'],
+  //   technologies: ['Node.js', 'Express', 'MongoDB', 'JavaScript', 'HTML', 'CSS'],
+  // },
   {
     id: 'Spotify-Clone',
     title: 'TTS-Spotify',
     shortDescription: 'A frontend-only Spotify clone that uses embedded Spotify iframes for streaming real songs. Built using HTML, CSS, and JavaScript, hosted on Netlify. Users can browse playlists and play real songs from Spotify with a clean, responsive UI.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: '/assets/image/SpotifyHeadshotUrl.png',
     imageAiHint: 'music player UI with playlist thumbnails',
     liveDemoUrl: 'https://tts-spotify.netlify.app/home.html',
     githubRepoUrl: 'https://github.com/tilak8923/TTS-Spotify',
@@ -161,41 +167,41 @@ MediMate AI is an AI-powered chatbot assistant designed for the healthcare secto
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     ></iframe>
     `.trim(),
-    screenshots: ['https://placehold.co/800x600.png', 'https://placehold.co/800x600.png'],
+    screenshots: ['/assets/image/SpotifyLogin.png','/assets/image/SpotifyHome.png','/assets/image/SpotifyPlaylist.png','/assets/image/SpotifyCode.png', '/assets/image/SpotifyReadme1.png' , '/assets/image/SpotifyReadme2.png'],
     useCases: ['Music Portfolio Project','Beginner-Level Spotify UI Clone','Frontend-Only Streaming Demo'],
     technologies: ['HTML','CSS','JavaScript','Spotify Embed API','Responsive UI','Netlify Hosting']
   },
-  {
-    id: 'folioforge-app',
-    title: 'FolioForge Portfolio',
-    shortDescription: 'A dynamic personal portfolio website built with Next.js and Tailwind CSS.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageAiHint: 'website design',
-    liveDemoUrl: '#',
-    githubRepoUrl: 'https://github.com/yourusername/folioforge',
-    tags: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
-    fullDescription: `
-### Project Overview
-FolioForge is a modern, responsive portfolio application designed to showcase projects, skills, and professional experience. 
-It features a clean, developer-centric aesthetic with dark mode capabilities.
+//   {
+//     id: 'folioforge-app',
+//     title: 'FolioForge Portfolio',
+//     shortDescription: 'A dynamic personal portfolio website built with Next.js and Tailwind CSS.',
+//     imageUrl: 'https://placehold.co/600x400.png',
+//     imageAiHint: 'website design',
+//     liveDemoUrl: '#',
+//     githubRepoUrl: 'https://github.com/yourusername/folioforge',
+//     tags: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
+//     fullDescription: `
+// ### Project Overview
+// FolioForge is a modern, responsive portfolio application designed to showcase projects, skills, and professional experience. 
+// It features a clean, developer-centric aesthetic with dark mode capabilities.
 
-### Key Features
-- Dynamic Project Showcase: Easily updateable project listings.
-- SEO Optimization Tool: AI-powered content enhancement for better search engine visibility.
-- Responsive Design: Adapts seamlessly to all screen sizes.
-- Dark Mode: A sleek dark theme for comfortable viewing.
+// ### Key Features
+// - Dynamic Project Showcase: Easily updateable project listings.
+// - SEO Optimization Tool: AI-powered content enhancement for better search engine visibility.
+// - Responsive Design: Adapts seamlessly to all screen sizes.
+// - Dark Mode: A sleek dark theme for comfortable viewing.
 
-### Technologies Used
-- Next.js for server-side rendering and static site generation.
-- React for building interactive UI components.
-- Tailwind CSS for utility-first styling.
-- TypeScript for type safety and improved developer experience.
-- Genkit for AI-powered SEO optimization.
-    `.trim(),
-    screenshots: ['https://placehold.co/800x600.png', 'https://placehold.co/800x600.png'],
-    useCases: ['Personal Portfolio', 'Developer Showcase', 'Online Resume'],
-    technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Genkit'],
-  }
+// ### Technologies Used
+// - Next.js for server-side rendering and static site generation.
+// - React for building interactive UI components.
+// - Tailwind CSS for utility-first styling.
+// - TypeScript for type safety and improved developer experience.
+// - Genkit for AI-powered SEO optimization.
+//     `.trim(),
+//     screenshots: ['https://placehold.co/800x600.png', 'https://placehold.co/800x600.png'],
+//     useCases: ['Personal Portfolio', 'Developer Showcase', 'Online Resume'],
+//     technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Genkit'],
+//   }
 ];
 
 export const skillsData: Skill[] = [
