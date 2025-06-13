@@ -40,34 +40,37 @@ export async function submitContactForm(
 
   const { name, email, message } = validatedFields.data;
 
-  console.log("Attempting to use GOOGLE_SHEETS_API_KEY:", process.env.GOOGLE_SHEETS_API_KEY ? "Key is set" : "Key is NOT SET or empty");
-
-  if (!process.env.GOOGLE_SHEETS_API_KEY) {
-    console.error("GOOGLE_SHEETS_API_KEY is not set in the environment variables.");
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL || !process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY) {
+    console.error("Google Service Account credentials (client email or private key) are not set in the environment variables.");
     return {
-      message: "Server configuration error: API key for Google Sheets is missing.",
-      errors: { server: ["Google Sheets API key is not configured on the server."] },
+      message: "Server configuration error: Service Account credentials for Google Sheets are missing or incomplete.",
+      errors: { server: ["Google Sheets Service Account credentials are not configured correctly on the server."] },
       success: false,
     };
   }
 
   try {
-    const sheets = google.sheets({ version: 'v4', auth: process.env.GOOGLE_SHEETS_API_KEY });
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'], // Required scope for Sheets API
+    });
 
+    const sheets = google.sheets({ version: 'v4', auth });
     const spreadsheetId = '1ORtBI77_8eujwQCrV7CgEH-wAwysUDfXuwAR-Jwl0b8';
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: 'Sheet1!A:D', // Ensure 'Sheet1' is the correct name of your sheet
       valueInputOption: 'USER_ENTERED',
-      // The 'auth' property is not directly used here if the sheets instance is already authed.
-      // The API key is passed when creating the `sheets` client.
-      resource: {
-        values: [[name, email, message, new Date().toISOString()]], // Added timestamp
+      requestBody: { // Changed 'resource' to 'requestBody' for v4
+        values: [[name, email, message, new Date().toISOString()]],
       },
     });
 
-    console.log("Data sent to Google Sheet successfully");
+    console.log("Data sent to Google Sheet successfully using Service Account");
     return {
       message: "Your message has been sent successfully! We'll get back to you soon.",
       errors: {},
@@ -75,7 +78,7 @@ export async function submitContactForm(
     };
 
   } catch (error: any) {
-    console.error("Error sending data to Google Sheet (full error object):", JSON.stringify(error, null, 2));
+    console.error("Error sending data to Google Sheet with Service Account (full error object):", JSON.stringify(error, null, 2));
     
     let specificErrorMessage = "Failed to send message to Google Sheet. Please check server logs for details.";
 
@@ -83,7 +86,7 @@ export async function submitContactForm(
       if (typeof error.response.data.error === 'string') {
           specificErrorMessage = error.response.data.error;
       } else if (error.response.data.error.message) {
-          specificErrorMessage = `API Error: ${error.response.data.error.message} (Status: ${error.response.data.error.code})`;
+          specificErrorMessage = `API Error: ${error.response.data.error.message} (Status: ${error.response.data.error.code || 'N/A'})`;
           if (error.response.data.error.details) {
             specificErrorMessage += ` Details: ${JSON.stringify(error.response.data.error.details)}`;
           }
