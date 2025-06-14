@@ -1,7 +1,79 @@
-# Firebase Studio
+# WebFolio by Tilak 🚀
 
-This is a NextJS starter in Firebase Studio.
+Welcome to **WebFolio by Tilak** —  
+A personal portfolio website crafted to showcase my journey, work, and growth as a **web developer** and **cybersecurity learner**.  
+Built using **Next.js**, **Tailwind CSS**, and modern web practices.
 
-To get started, take a look at src/app/page.tsx.
-# webfolio
-# webfolio
+---
+
+## 🛠 Tech Stack
+
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **Firebase Hosting**
+
+---
+
+## 🌟 Features
+
+✅ Clean, minimal design  
+✅ Responsive layout — works across all devices  
+✅ Smooth animations & transitions  
+✅ Fast load times with Next.js optimizations  
+✅ Easy to maintain and scale  
+
+---
+
+## 🚀 Deployment
+
+This portfolio is deployed on **Firebase Hosting**.  
+To run locally:
+
+
+
+# 🌟 WebFolio by Tilak
+
+Welcome to **WebFolio**, my personal portfolio website — built to **showcase my work, growth, and passion** as a **Web Developer** and **Cybersecurity Enthusiast**.  
+Crafted using cutting-edge tech, with performance and simplicity in mind.
+
+---
+
+## 🚀 Features
+
+- ⚡ **Blazing fast** with Next.js
+- 📱 **Responsive design** — looks great on all devices
+- 🎨 **Styled with Tailwind CSS**
+- 🌍 **Hosted on Firebase**
+- 🔐 **Clean code, no bloat**
+
+---
+
+## 🛠 Tech Stack
+
+| 🚀 Framework | 🎨 Styling | ☁ Hosting | 💻 Language |
+|--------------|------------|-----------|------------|
+| Next.js       | TailwindCSS | Firebase  | TypeScript |
+
+---
+
+## ⚡ Getting Started
+
+Clone the repo:
+git clone https://github.com/tilak8923/webfolio.git
+cd webfolio
+Install dependencies:
+
+
+npm install
+Start the development server:
+
+
+npm run dev
+Open http://localhost:3000 in your browser.
+
+🤝 Connect with me
+<p align="left"> <a href="https://github.com/tilak8923" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"> </a> <a href="https://www.linkedin.com/in/tilak-tiwari-33b84825a/" target="_blank"> <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"> </a> <a href="mailto:tilaktiwari789@gmail.com" target="_blank"> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"> </a> </p>
+📄 License
+Licensed under the MIT License — feel free to fork, use, and contribute!
+Built with passion, powered by coffee ☕.
