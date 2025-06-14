@@ -10,7 +10,7 @@ Crafted using cutting-edge tech, with performance and simplicity in mind.
 - ⚡ **Blazing fast** with Next.js
 - 📱 **Responsive design** — looks great on all devices
 - 🎨 **Styled with Tailwind CSS**
-- 🌍 **Hosted on Firebase**
+- 🌍 **Hosted on Vercel**
 - 🔐 **Clean code, no bloat**
 
 ---
