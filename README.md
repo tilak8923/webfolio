@@ -1,38 +1,4 @@
-# WebFolio by Tilak 🚀
-
-Welcome to **WebFolio by Tilak** —  
-A personal portfolio website crafted to showcase my journey, work, and growth as a **web developer** and **cybersecurity learner**.  
-Built using **Next.js**, **Tailwind CSS**, and modern web practices.
-
----
-
-## 🛠 Tech Stack
-
-- **Next.js**
-- **TypeScript**
-- **Tailwind CSS**
-- **Firebase Hosting**
-
----
-
-## 🌟 Features
-
-✅ Clean, minimal design  
-✅ Responsive layout — works across all devices  
-✅ Smooth animations & transitions  
-✅ Fast load times with Next.js optimizations  
-✅ Easy to maintain and scale  
-
----
-
-## 🚀 Deployment
-
-This portfolio is deployed on **Firebase Hosting**.  
-To run locally:
-
-
-
-# 🌟 WebFolio by Tilak
+# 💼 WebFolio by Tilak
 
 Welcome to **WebFolio**, my personal portfolio website — built to **showcase my work, growth, and passion** as a **Web Developer** and **Cybersecurity Enthusiast**.  
 Crafted using cutting-edge tech, with performance and simplicity in mind.
