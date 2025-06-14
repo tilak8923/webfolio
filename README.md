@@ -20,7 +20,7 @@ Crafted using cutting-edge tech, with performance and simplicity in mind.
 
 Explore my portfolio live:
 
-🌐 [👉 Visit Webfolio by Tilak](https://tilakfolio.vercel.app)
+👉 [ Visit Webfolio by Tilak](https://tilakfolio.vercel.app)
 
 ---
 
@@ -28,7 +28,7 @@ Explore my portfolio live:
 
 | 🚀 Framework | 🎨 Styling | ☁ Hosting | 💻 Language |
 |--------------|------------|-----------|------------|
-| Next.js       | TailwindCSS | Firebase  | TypeScript |
+| Next.js       | TailwindCSS | Vercel  | TypeScript |
 
 ---
 
