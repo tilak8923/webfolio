@@ -47,8 +47,11 @@ Start the development server:
 npm run dev
 Open http://localhost:3000 in your browser.
 
-🤝 Connect with me
+## 🤝 Connect with me
+
 <p align="left"> <a href="https://github.com/tilak8923" target="_blank"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"> </a> <a href="https://www.linkedin.com/in/tilak-tiwari-33b84825a/" target="_blank"> <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"> </a> <a href="mailto:tilaktiwari789@gmail.com" target="_blank"> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"> </a> </p>
-📄 License
+
+## 📄 License
+
 Licensed under the MIT License — feel free to fork, use, and contribute!
 Built with passion, powered by coffee ☕.
