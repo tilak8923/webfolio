@@ -71,8 +71,8 @@ export const projectsData: Project[] = [
     shortDescription: 'An AI-powered healthcare assistant web app built with Next.js, Tailwind CSS, Node.js, and Firebase.Features include Google login, real-time chat with a medical AI chatbot, and secure chat history management — designed for patients seeking quick and reliable medical guidance.',
     imageUrl: '/assets/image/headshotUrl.png',
     imageAiHint: 'coding interface',
-    liveDemoUrl: '#',
-    githubRepoUrl: 'https://github.com/tilak8923/MediMate-AI',
+    liveDemoUrl: 'https://medimateai.vercel.app',
+    githubRepoUrl: 'https://github.com/tilak8923/MediMateAI',
     tags: ['Next.js', 'Node.js' , 'Tailwind CSS','Firebase Authentication', 'Firebase Firestore (Database)','Google Sign-In Integration', 'AI Chatbot (OpenAI-based or similar)', 'Responsive UI/UX Design', 'Real-time Chat Interface' ],
     fullDescription: `
 ### Project Overview
@@ -92,7 +92,7 @@ MediMate AI is an AI-powered chatbot assistant designed for the healthcare secto
 - Firebase Authentication for secure user login (Google Sign-In).
 - Firebase Firestore to store user data and chat history in real-time.
     `.trim(),
-    screenshots: ['https://placehold.co/800x600.png', 'https://placehold.co/800x600.png'],
+    screenshots: ['/assets/image/MedimateChat1.png', '/assets/image/MedimateChat2.png'],
     useCases: ['Medical Chatbot', 'Patient Support Platform', 'Virtual Health Consultation'],
     technologies: ['Next.js', 'Node.js' , 'Tailwind CSS','Firebase Authentication', 'Firebase Firestore (Database)','Google Sign-In Integration', 'AI Chatbot (OpenAI-based or similar)', 'Responsive UI/UX Design', 'Real-time Chat Interface'],
   },
