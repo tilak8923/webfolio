@@ -5,7 +5,7 @@ import MainLayout from '@/components/layout/main-layout';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'FolioForge - Your Professional Portfolio',
+  title: 'Tilak Portfolio',
   description: 'Showcase your projects, skills, and experience with FolioForge.',
 };
 

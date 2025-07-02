@@ -92,7 +92,7 @@ MediMate AI is an AI-powered chatbot assistant designed for the healthcare secto
 - Firebase Authentication for secure user login (Google Sign-In).
 - Firebase Firestore to store user data and chat history in real-time.
     `.trim(),
-    screenshots: ['/assets/image/MedimateChat1.png', '/assets/image/MedimateChat2.png'],
+    screenshots: ['/assets/image/AIWSignup.png', '/assets/image/AIWLogin.png' , '/assets/image/AIWChat1.png', '/assets/image/AIWChat2.png'],
     useCases: ['Medical Chatbot', 'Patient Support Platform', 'Virtual Health Consultation'],
     technologies: ['Next.js', 'Node.js' , 'Tailwind CSS','Firebase Authentication', 'Firebase Firestore (Database)','Google Sign-In Integration', 'AI Chatbot (OpenAI-based or similar)', 'Responsive UI/UX Design', 'Real-time Chat Interface'],
   },
