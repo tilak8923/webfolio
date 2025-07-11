@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Github, Linkedin, Twitter, Globe, Briefcase, Lightbulb, Code, Settings, BarChart } from 'lucide-react';
+import { Github, Linkedin, Twitter, Globe,UserLock, Briefcase, Lightbulb, Code, Settings, BarChart, Hexagon, Waves, Atom, Flame, BrainCog, GlobeLock, ShieldCheck } from 'lucide-react';
 
 export interface Project {
   id: string;
@@ -205,13 +205,16 @@ MediMate AI is an AI-powered chatbot assistant designed for the healthcare secto
 ];
 
 export const skillsData: Skill[] = [
-  { name: 'JavaScript', proficiency: 60, icon: Code },
-  { name: 'TypeScript', proficiency: 50, icon: Code },
-  { name: 'React / Next.js', proficiency: 65, icon: Code },
-  { name: 'Node.js / Express', proficiency: 40, icon: Settings },
+  { name: 'Network Security', proficiency: 60, icon: ShieldCheck },
+  { name: 'Ethical Hacking', proficiency: 50, icon: BrainCog },
+  { name: 'Information Security', proficiency: 40, icon: UserLock },
+  { name: 'Web Application Security', proficiency: 80, icon: GlobeLock },
+  { name: 'Google Cloud Console', proficiency: 70, icon: Hexagon},
+  { name: 'Cloud (FireStore)', proficiency: 70, icon: Flame },
+  { name: 'React.js', proficiency: 65, icon: Atom },
   { name: 'Python', proficiency: 75, icon: Code },
-  { name: 'Databases (SQl/MongoDB Compass)', proficiency: 80, icon: BarChart },
-  { name: 'Cloud (Firebase)', proficiency: 70, icon: Globe },
+  { name: 'Tailwind css', proficiency: 70, icon: Waves},
+  { name: 'Frontend Development', proficiency: 60, icon: Code },
   { name: 'Prompt Engineering', proficiency: 60, icon: Lightbulb },
 ];
 
