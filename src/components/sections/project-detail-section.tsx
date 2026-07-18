@@ -3,13 +3,22 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Play } from 'lucide-react';
+import { AQIAnalysisChart, FoodWastePredictionChart } from '@/components/custom/data-science-charts';
 
 interface ProjectDetailSectionProps {
   project: Project;
 }
 
 export default function ProjectDetailSection({ project }: ProjectDetailSectionProps) {
+  const isDataScience = project.tags.includes('Data Science') || project.tags.includes('Jupyter Notebook');
+  const isAQI = project.id === 'AQI-Analysis';
+
+  // Determine Google Colab link
+  const colabLink = isAQI
+    ? 'https://colab.research.google.com/github/tilak8923/AQI-Analysis/blob/main/AQI_Analysis.ipynb'
+    : 'https://colab.research.google.com/github/tilak8923/FoodRedunctionPredictionModel/blob/main/Food_Reduction_Model.ipynb';
+
   return (
     <section className="container py-12">
       <div className="max-w-4xl mx-auto">
@@ -32,20 +41,53 @@ export default function ProjectDetailSection({ project }: ProjectDetailSectionPr
           />
         </div>
         
+        {/* Render Interactive Charts for Data Science Projects */}
+        {project.id === 'AQI-Analysis' && (
+          <div className="mb-10">
+            <h2 className="font-headline text-2xl font-semibold mb-4 text-foreground">Interactive Analysis Output</h2>
+            <AQIAnalysisChart />
+          </div>
+        )}
+        {project.id === 'Food-Reduction-Prediction' && (
+          <div className="mb-10">
+            <h2 className="font-headline text-2xl font-semibold mb-4 text-foreground">Interactive Analysis Output</h2>
+            <FoodWastePredictionChart />
+          </div>
+        )}
+
         <div className="flex space-x-4 mb-8">
-          {project.liveDemoUrl && (
-            <Button asChild className="transition-transform hover:scale-105">
-              <Link href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-              </Link>
-            </Button>
-          )}
-          {project.githubRepoUrl && (
-            <Button variant="outline" asChild className="transition-transform hover:scale-105">
-              <Link href={project.githubRepoUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" /> View on GitHub
-              </Link>
-            </Button>
+          {isDataScience ? (
+            <>
+              <Button asChild className="transition-transform hover:scale-105 bg-emerald-600 hover:bg-emerald-700 text-white font-medium">
+                <Link href={colabLink} target="_blank" rel="noopener noreferrer">
+                  <Play className="mr-2 h-4 w-4 fill-current" /> Open in Google Colab
+                </Link>
+              </Button>
+              {project.githubRepoUrl && (
+                <Button variant="outline" asChild className="transition-transform hover:scale-105">
+                  <Link href={project.githubRepoUrl} target="_blank" rel="noopener noreferrer">
+                    <Github className="mr-2 h-4 w-4" /> View Jupyter Notebook
+                  </Link>
+                </Button>
+              )}
+            </>
+          ) : (
+            <>
+              {project.liveDemoUrl && (
+                <Button asChild className="transition-transform hover:scale-105">
+                  <Link href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
+                  </Link>
+                </Button>
+              )}
+              {project.githubRepoUrl && (
+                <Button variant="outline" asChild className="transition-transform hover:scale-105">
+                  <Link href={project.githubRepoUrl} target="_blank" rel="noopener noreferrer">
+                    <Github className="mr-2 h-4 w-4" /> View on GitHub
+                  </Link>
+                </Button>
+              )}
+            </>
           )}
         </div>
 
