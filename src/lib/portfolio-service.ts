@@ -1,5 +1,3 @@
-import { db, isFirebaseConfigured } from './firebase';
-import { doc, getDoc, setDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import * as Icons from 'lucide-react';
 import { aboutMe as staticAboutMe, projectsData as staticProjects, skillsData as staticSkills, Project, Skill, AboutMeData } from './portfolio-data';
 
@@ -35,41 +33,13 @@ const setLocal = (key: string, data: any) => {
 // -------------------------------------------------------------
 
 export const getAboutMe = async (): Promise<AboutMeData> => {
-  // 1. Try Firestore
-  if (isFirebaseConfigured && db) {
-    try {
-      const docRef = doc(db, 'portfolio', 'about_me');
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        return docSnap.data() as AboutMeData;
-      }
-    } catch (e) {
-      console.warn('Error fetching aboutMe from Firestore, using fallback:', e);
-    }
-  }
-
-  // 2. Try LocalStorage
   const local = getLocal(KEYS.ABOUT_ME);
   if (local) return local;
-
-  // 3. Fallback to static
   return staticAboutMe;
 };
 
 export const saveAboutMe = async (data: AboutMeData): Promise<void> => {
-  // Always update LocalStorage for instant local preview
   setLocal(KEYS.ABOUT_ME, data);
-
-  // Update Firestore if configured
-  if (isFirebaseConfigured && db) {
-    try {
-      const docRef = doc(db, 'portfolio', 'about_me');
-      await setDoc(docRef, data);
-    } catch (e) {
-      console.error('Error saving aboutMe to Firestore:', e);
-      throw e;
-    }
-  }
 };
 
 // -------------------------------------------------------------
@@ -77,28 +47,8 @@ export const saveAboutMe = async (data: AboutMeData): Promise<void> => {
 // -------------------------------------------------------------
 
 export const getProjects = async (): Promise<Project[]> => {
-  // 1. Try Firestore
-  if (isFirebaseConfigured && db) {
-    try {
-      const colRef = collection(db, 'projects');
-      const querySnapshot = await getDocs(colRef);
-      if (!querySnapshot.empty) {
-        const list: Project[] = [];
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() } as Project);
-        });
-        return list;
-      }
-    } catch (e) {
-      console.warn('Error fetching projects from Firestore, using fallback:', e);
-    }
-  }
-
-  // 2. Try LocalStorage
   const local = getLocal(KEYS.PROJECTS);
   if (local && Array.isArray(local) && local.length > 0) return local;
-
-  // 3. Fallback to static
   return staticProjects;
 };
 
@@ -115,39 +65,13 @@ export const saveProject = async (project: Project): Promise<void> => {
   } else {
     projects.push(project);
   }
-
-  // Always update LocalStorage
   setLocal(KEYS.PROJECTS, projects);
-
-  // Update Firestore if configured
-  if (isFirebaseConfigured && db) {
-    try {
-      const docRef = doc(db, 'projects', project.id);
-      await setDoc(docRef, project);
-    } catch (e) {
-      console.error('Error saving project to Firestore:', e);
-      throw e;
-    }
-  }
 };
 
 export const deleteProject = async (id: string): Promise<void> => {
   const projects = await getProjects();
   const filtered = projects.filter((p) => p.id !== id);
-
-  // Always update LocalStorage
   setLocal(KEYS.PROJECTS, filtered);
-
-  // Update Firestore if configured
-  if (isFirebaseConfigured && db) {
-    try {
-      const docRef = doc(db, 'projects', id);
-      await deleteDoc(docRef);
-    } catch (e) {
-      console.error('Error deleting project from Firestore:', e);
-      throw e;
-    }
-  }
 };
 
 // -------------------------------------------------------------
@@ -155,24 +79,6 @@ export const deleteProject = async (id: string): Promise<void> => {
 // -------------------------------------------------------------
 
 export const getSkills = async (): Promise<Skill[]> => {
-  // 1. Try Firestore
-  if (isFirebaseConfigured && db) {
-    try {
-      const docRef = doc(db, 'portfolio', 'skills');
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists() && docSnap.data().skills) {
-        const skillsList = docSnap.data().skills as Skill[];
-        return skillsList.map(s => ({
-          ...s,
-          icon: s.iconName ? getIconByName(s.iconName) : undefined
-        }));
-      }
-    } catch (e) {
-      console.warn('Error fetching skills from Firestore, using fallback:', e);
-    }
-  }
-
-  // 2. Try LocalStorage
   const local = getLocal(KEYS.SKILLS);
   if (local && Array.isArray(local) && local.length > 0) {
     return local.map((s: any) => ({
@@ -181,12 +87,9 @@ export const getSkills = async (): Promise<Skill[]> => {
     }));
   }
 
-  // 3. Fallback to static
   return staticSkills.map(s => {
-    // Map static icon component to its string name if not present
     let iconName = s.iconName;
     if (!iconName && s.icon) {
-      // Try to find the name of the icon function
       iconName = s.icon.displayName || s.icon.name || '';
     }
     return {
@@ -198,27 +101,13 @@ export const getSkills = async (): Promise<Skill[]> => {
 };
 
 export const saveSkills = async (skills: Skill[]): Promise<void> => {
-  // Normalize skills: strip the actual icon component function to prevent serialization errors
   const normalized = skills.map(s => ({
     name: s.name,
     proficiency: Number(s.proficiency),
     category: s.category || 'Frontend',
     iconName: s.iconName || ''
   }));
-
-  // Always update LocalStorage
   setLocal(KEYS.SKILLS, normalized);
-
-  // Update Firestore if configured
-  if (isFirebaseConfigured && db) {
-    try {
-      const docRef = doc(db, 'portfolio', 'skills');
-      await setDoc(docRef, { skills: normalized });
-    } catch (e) {
-      console.error('Error saving skills to Firestore:', e);
-      throw e;
-    }
-  }
 };
 
 // Fallback logic to categorize legacy skills

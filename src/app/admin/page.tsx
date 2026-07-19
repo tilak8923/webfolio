@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { getAboutMe, saveAboutMe, getProjects, saveProject, deleteProject, getSkills, saveSkills } from '@/lib/portfolio-service';
 import { Project, Skill, AboutMeData } from '@/lib/portfolio-data';
-import { isFirebaseConfigured, auth, googleProvider } from '@/lib/firebase';
-import { signInWithPopup, signOut, onAuthStateChanged, User } from 'firebase/auth';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,41 +29,16 @@ export default function AdminPage() {
   const [editingProject, setEditingProject] = useState<Partial<Project> | null>(null);
   const [editingSkill, setEditingSkill] = useState<Partial<Skill> | null>(null);
 
-  // Monitor auth state if Firebase is active
+  // Check local storage for session
   useEffect(() => {
-    if (isFirebaseConfigured && auth) {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user && user.email === 'tilaktiwari789@gmail.com') {
-          setIsAuthenticated(true);
-          setUserEmail(user.email);
-          loadPortfolioData();
-        } else {
-          setIsAuthenticated(false);
-          setUserEmail(null);
-          if (user) {
-            // Logged in with wrong email
-            toast({
-              title: 'Access Denied',
-              description: 'You are not authorized to edit this portfolio.',
-              variant: 'destructive',
-            });
-            signOut(auth);
-          }
-        }
-        setAuthLoading(false);
-      });
-      return () => unsubscribe();
-    } else {
-      // Check local storage for session
-      if (typeof window !== 'undefined') {
-        const localSession = localStorage.getItem('tilakfolio_admin_session');
-        if (localSession === 'active') {
-          setIsAuthenticated(true);
-          loadPortfolioData();
-        }
+    if (typeof window !== 'undefined') {
+      const localSession = localStorage.getItem('tilakfolio_admin_session');
+      if (localSession === 'active') {
+        setIsAuthenticated(true);
+        loadPortfolioData();
       }
-      setAuthLoading(false);
     }
+    setAuthLoading(false);
   }, []);
 
   const loadPortfolioData = async () => {
@@ -90,26 +63,19 @@ export default function AdminPage() {
   // AUTHENTICATION HANDLERS
   // -------------------------------------------------------------
 
-  const handleGoogleLogin = async () => {
-    if (!isFirebaseConfigured || !auth || !googleProvider) return;
-    try {
-      setAuthLoading(true);
-      await signInWithPopup(auth, googleProvider);
-    } catch (error: any) {
-      console.error('Google Sign-In Error:', error);
-      toast({
-        title: 'Login Failed',
-        description: error.message || 'An error occurred during authentication.',
-        variant: 'destructive',
-      });
-      setAuthLoading(false);
-    }
-  };
-
   const handlePasswordLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'tilakadmin123';
+    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
     
+    if (!adminPassword) {
+      toast({
+        title: 'Configuration Error',
+        description: 'NEXT_PUBLIC_ADMIN_PASSWORD environment variable is not configured.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     if (password === adminPassword) {
       setIsAuthenticated(true);
       if (typeof window !== 'undefined') {
@@ -129,18 +95,14 @@ export default function AdminPage() {
     }
   };
 
-  const handleLogout = async () => {
-    if (isFirebaseConfigured && auth) {
-      await signOut(auth);
-    } else {
-      setIsAuthenticated(false);
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('tilakfolio_admin_session');
-      }
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('tilakfolio_admin_session');
     }
     toast({
       title: 'Logged Out',
-      description: 'Session ended successfully.',
+      description: 'You have been successfully logged out.',
     });
   };
 
@@ -411,49 +373,25 @@ export const getProjectById = (id: string): Project | undefined => projectsData.
           </CardHeader>
           
           <CardContent className="space-y-4">
-            {isFirebaseConfigured ? (
-              // Firebase Google Login
-              <div className="space-y-4 pt-2">
-                <Button onClick={handleGoogleLogin} className="w-full py-6 text-sm font-semibold rounded-xl flex items-center justify-center gap-2">
-                  <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12.24 10.285V13.4h6.887C18.2 15.614 15.645 18 12.24 18c-3.86 0-7-3.14-7-7s3.14-7 7-7c1.7 0 3.3 0.643 4.56 1.885l2.443-2.443C17.396 1.582 14.954 1 12.24 1 6.033 1 1 6.033 1 12.24s5.033 11.24 11.24 11.24c5.897 0 10.867-4.225 10.867-10.89 0-.643-.07-1.18-.2-1.74H12.24z" />
-                  </svg>
-                  Login with Google
-                </Button>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground bg-secondary/50 p-3 rounded-lg border border-border/30">
-                  <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
-                  <span>Authorized emails: <strong>tilaktiwari789@gmail.com</strong>.</span>
+            <form onSubmit={handlePasswordLogin} className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Access Password</label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="password"
+                    placeholder="Enter administrator passkey..."
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 h-11 rounded-xl"
+                    required
+                  />
                 </div>
               </div>
-            ) : (
-              // Local Password Login (Fallback)
-              <form onSubmit={handlePasswordLogin} className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Access Password</label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      type="password"
-                      placeholder="Enter administrator passkey..."
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 h-11 rounded-xl"
-                      required
-                    />
-                  </div>
-                </div>
-                <Button type="submit" className="w-full py-5 rounded-xl text-sm font-semibold">
-                  Unlock Console
-                </Button>
-                <div className="flex items-start gap-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/20 leading-relaxed">
-                  <ShieldAlert className="h-4 w-4 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold block mb-0.5">Local Storage Mock Mode</span>
-                    Firebase environment variables are not configured. Logging in with the default password (<strong>tilakadmin123</strong>) or your custom `.env` password. Changes will save in your browser.
-                  </div>
-                </div>
-              </form>
-            )}
+              <Button type="submit" className="w-full py-5 rounded-xl text-sm font-semibold">
+                Unlock Console
+              </Button>
+            </form>
           </CardContent>
           <CardFooter className="justify-center border-t border-border/40 py-4 bg-secondary/20 rounded-b-2xl">
             <Link href="/" className="text-xs text-muted-foreground hover:text-primary transition-colors">
@@ -500,24 +438,15 @@ export const getProjectById = (id: string): Project | undefined => projectsData.
             <CardContent className="space-y-4 text-xs font-medium">
               <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 border">
                 <span className="text-muted-foreground">Database Mode:</span>
-                <span className="flex items-center gap-1 font-bold">
-                  <Database className={`h-3.5 w-3.5 ${isFirebaseConfigured ? 'text-green-500' : 'text-amber-500'}`} />
-                  {isFirebaseConfigured ? 'Firestore' : 'Local Storage'}
+                <span className="flex items-center gap-1 font-bold text-amber-500">
+                  <Database className="h-3.5 w-3.5 text-amber-500" />
+                  Local Storage
                 </span>
               </div>
-              
-              {!isFirebaseConfigured && (
-                <div className="p-3 bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 rounded-lg space-y-1.5 leading-relaxed font-normal">
-                  <p className="font-semibold text-xs">Temporary Mode:</p>
-                  <p>Changes will save in your browser. Use the **Copy Code (Git Backup)** button to copy your code updates and paste them into `src/lib/portfolio-data.ts` to make them permanent in git!</p>
-                </div>
-              )}
-              {isFirebaseConfigured && (
-                <div className="p-3 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 rounded-lg space-y-1.5 leading-relaxed font-normal">
-                  <p className="font-semibold text-xs">Production Synced:</p>
-                  <p>Connected directly to Firestore. Changes will propagate in real-time to all public visitors of your website.</p>
-                </div>
-              )}
+              <div className="p-3 bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 rounded-lg space-y-1.5 leading-relaxed font-normal font-sans">
+                <p className="font-semibold text-xs text-amber-800 dark:text-amber-400">Local Backup Sync:</p>
+                <p>Changes will save in your browser. Use the **Copy Code (Git Backup)** button to copy your code updates, and paste them into `src/lib/portfolio-data.ts` to make them permanent in git!</p>
+              </div>
             </CardContent>
           </Card>
         </div>
